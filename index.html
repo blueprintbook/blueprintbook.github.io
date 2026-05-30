@@ -267,7 +267,7 @@
 
     .book-scene {
       perspective: 1400px;
-      width: 300px;
+      width: 380px;
     }
 
     .book-3d {
@@ -332,9 +332,9 @@
     /* ── BLUEPRINT ICON AREA ── */
     .book-icon-area {
       position: absolute;
-      top: 0; right: 0;
-      width: 78%; height: 56%;
-      display: flex; align-items: flex-start; justify-content: flex-end;
+      top: 0; left: 0; right: 0;
+      height: 58%;
+      display: flex; align-items: flex-start; justify-content: center;
     }
     .book-icon-area svg {
       width: 100%; height: 100%;
@@ -933,42 +933,58 @@
           <div class="book-cover-face">
             <div class="book-inner-border">
 
-              <!-- Blueprint icon — thin white linework, top-right -->
+              <!-- Blueprint icon — faithful recreation of actual book cover -->
               <div class="book-icon-area">
-                <svg viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg"
-                  stroke="rgba(255,255,255,0.55)" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 280 215" fill="none" xmlns="http://www.w3.org/2000/svg"
+                  stroke="rgba(255,255,255,0.75)" stroke-linecap="round" stroke-linejoin="round">
 
-                  <!-- Blueprint scroll/document -->
-                  <path d="M28,170 L28,42 Q28,30 40,30 L160,30 Q172,30 172,42 L172,158 Q172,170 160,170 Z" stroke-width="2.5"/>
-                  <!-- Left rolled edge -->
-                  <path d="M28,30 Q14,38 14,100 Q14,162 28,170" stroke-width="2.5"/>
-                  <!-- Fold corner top-right -->
-                  <path d="M148,30 L148,50 L172,50" stroke-width="2"/>
-                  <!-- Horizontal guide lines on scroll -->
-                  <line x1="44" y1="78" x2="130" y2="78" stroke-width="1.2" stroke-dasharray="4,4"/>
-                  <line x1="44" y1="95" x2="110" y2="95" stroke-width="1.2" stroke-dasharray="4,4"/>
-                  <line x1="44" y1="112" x2="120" y2="112" stroke-width="1.2" stroke-dasharray="4,4"/>
+                  <!-- ── BLUEPRINT SCROLL (background) ──
+                       Landscape rectangle with cylindrical rolled RIGHT edge,
+                       flat left edge — like a blueprint unrolled from the right -->
+                  <!-- Main flat paper body -->
+                  <path d="M12,55 L12,185 Q12,195 22,195 L198,195 Q198,195 198,195 L198,55 Q198,55 198,55 L22,55 Q12,55 12,55 Z" stroke-width="2"/>
+                  <!-- Rolled right edge (cylinder) -->
+                  <ellipse cx="198" cy="125" rx="12" ry="70" stroke-width="2"/>
+                  <!-- Inner ellipse of roll showing depth -->
+                  <ellipse cx="198" cy="125" rx="5" ry="62" stroke-width="1.2" stroke-dasharray="3,3"/>
+                  <!-- Blueprint dashed lines on paper -->
+                  <line x1="28" y1="138" x2="182" y2="138" stroke-width="1.2" stroke-dasharray="6,5"/>
+                  <line x1="28" y1="158" x2="165" y2="158" stroke-width="1.2" stroke-dasharray="6,5"/>
+                  <line x1="28" y1="178" x2="175" y2="178" stroke-width="1.2" stroke-dasharray="6,5"/>
 
-                  <!-- Upward arrow 1 (vertical, center-left) -->
-                  <line x1="72" y1="162" x2="72" y2="52" stroke-width="2.8"/>
-                  <polyline points="60,72 72,48 84,72" stroke-width="2.8"/>
+                  <!-- ── THREE UPWARD ARROWS (close-grouped, mostly vertical) ── -->
+                  <!-- Arrow 1 (left) — slight left lean -->
+                  <line x1="75"  y1="200" x2="52"  y2="22" stroke-width="2.8"/>
+                  <polyline points="40,44 51,16 66,40"  stroke-width="2.8" fill="none"/>
 
-                  <!-- Upward arrow 2 (diagonal, going upper-right) -->
-                  <line x1="88" y1="158" x2="148" y2="62" stroke-width="2.8"/>
-                  <polyline points="134,58 150,56 148,74" stroke-width="2.8"/>
+                  <!-- Arrow 2 (center) — straight up, tallest -->
+                  <line x1="110" y1="200" x2="110" y2="10" stroke-width="2.8"/>
+                  <polyline points="98,32 110,6 122,32"  stroke-width="2.8" fill="none"/>
 
-                  <!-- Gear wheel -->
-                  <circle cx="178" cy="95" r="30" stroke-width="2.5"/>
-                  <circle cx="178" cy="95" r="14" stroke-width="2.5"/>
-                  <!-- 8 gear teeth -->
-                  <rect x="171" y="60" width="14" height="10" rx="2" stroke-width="1.8" fill="rgba(52,77,120,0.6)"/>
-                  <rect x="171" y="120" width="14" height="10" rx="2" stroke-width="1.8" fill="rgba(52,77,120,0.6)"/>
-                  <rect x="143" y="88" width="10" height="14" rx="2" stroke-width="1.8" fill="rgba(52,77,120,0.6)"/>
-                  <rect x="203" y="88" width="10" height="14" rx="2" stroke-width="1.8" fill="rgba(52,77,120,0.6)"/>
-                  <rect x="151" y="65" width="10" height="10" rx="2" stroke-width="1.8" fill="rgba(52,77,120,0.6)" transform="rotate(45 156 70)"/>
-                  <rect x="197" y="65" width="10" height="10" rx="2" stroke-width="1.8" fill="rgba(52,77,120,0.6)" transform="rotate(-45 202 70)"/>
-                  <rect x="151" y="110" width="10" height="10" rx="2" stroke-width="1.8" fill="rgba(52,77,120,0.6)" transform="rotate(-45 156 115)"/>
-                  <rect x="197" y="110" width="10" height="10" rx="2" stroke-width="1.8" fill="rgba(52,77,120,0.6)" transform="rotate(45 202 115)"/>
+                  <!-- Arrow 3 (right) — slight right lean -->
+                  <line x1="145" y1="200" x2="168" y2="22" stroke-width="2.8"/>
+                  <polyline points="154,40 169,16 180,44" stroke-width="2.8" fill="none"/>
+
+                  <!-- ── GEAR WHEEL (right of scroll, overlapping) ── -->
+                  <circle cx="238" cy="112" r="30" stroke-width="2.4"/>
+                  <circle cx="238" cy="112" r="13" stroke-width="2.4"/>
+                  <!-- 8 gear teeth using paths for clean look -->
+                  <!-- Top -->
+                  <rect x="231" y="78"  width="14" height="10" rx="2.5" stroke-width="1.8" fill="#344d78"/>
+                  <!-- Bottom -->
+                  <rect x="231" y="136" width="14" height="10" rx="2.5" stroke-width="1.8" fill="#344d78"/>
+                  <!-- Left -->
+                  <rect x="204" y="105" width="10" height="14" rx="2.5" stroke-width="1.8" fill="#344d78"/>
+                  <!-- Right -->
+                  <rect x="264" y="105" width="10" height="14" rx="2.5" stroke-width="1.8" fill="#344d78"/>
+                  <!-- Top-left diagonal -->
+                  <rect x="211" y="84"  width="10" height="10" rx="2" stroke-width="1.8" fill="#344d78" transform="rotate(45 216 89)"/>
+                  <!-- Top-right diagonal -->
+                  <rect x="255" y="84"  width="10" height="10" rx="2" stroke-width="1.8" fill="#344d78" transform="rotate(-45 260 89)"/>
+                  <!-- Bottom-left diagonal -->
+                  <rect x="211" y="130" width="10" height="10" rx="2" stroke-width="1.8" fill="#344d78" transform="rotate(-45 216 135)"/>
+                  <!-- Bottom-right diagonal -->
+                  <rect x="255" y="130" width="10" height="10" rx="2" stroke-width="1.8" fill="#344d78" transform="rotate(45 260 135)"/>
                 </svg>
               </div>
 
@@ -989,14 +1005,6 @@
           <div class="book-spine"></div>
         </div>
 
-        <!-- Endorsement pill -->
-        <div class="endorsement-pill" id="endorsement">
-          <div class="endorsement-dot"></div>
-          <div class="endorsement-text">
-            <strong>EFESO Consulting</strong>
-            Partner &amp; MD · India Operations
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -1230,7 +1238,6 @@
       .to('#hero-actions',  { opacity: 1, y: 0, duration: 0.6,  }, '-=0.4')
       .from('#book-3d',     { opacity: 0, y: 60, rotateY: -30, duration: 1.2, ease: 'power3.out' }, '-=0.8')
       .to('#badge',         { opacity: 1, duration: 0.5, ease: 'back.out(2)' }, '-=0.4')
-      .to('#endorsement',   { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(2)' }, '-=0.3');
 
     // ── COUNTER ANIMATION ──────────────────────────────────────────
     document.querySelectorAll('[data-count]').forEach(el => {
