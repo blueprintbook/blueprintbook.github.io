@@ -121,10 +121,9 @@
       50%      { opacity:1;   transform:scale(1.08); }
     }
 
-    /* Floating animation on the book image */
+    /* Float animation driven by GSAP (no CSS keyframe — avoids GSAP transform conflict) */
     .book-float {
       position:relative; z-index:2;
-      animation: bookFloat 5s ease-in-out infinite;
       transform-origin:center bottom;
       filter: drop-shadow(-18px 24px 40px rgba(0,0,0,0.65))
               drop-shadow(0 0 30px rgba(212,148,26,0.2));
@@ -134,10 +133,6 @@
       filter: drop-shadow(-22px 28px 50px rgba(0,0,0,0.7))
               drop-shadow(0 0 50px rgba(212,148,26,0.35));
     }
-    @keyframes bookFloat {
-      0%,100% { transform: translateY(0px)   rotate(-2deg); }
-      50%      { transform: translateY(-14px) rotate(-1deg); }
-    }
 
     .book-cover-img {
       width:100%; display:block;
@@ -146,8 +141,8 @@
       object-fit: contain;
     }
 
-    /* Floating badge */
-    .floating-badge { position:absolute; top:-0.5rem; right:-1.5rem; background:var(--orange); padding:0.7rem 0.9rem; clip-path:polygon(0 0,100% 0,100% 80%,50% 100%,0 80%); text-align:center; transform:rotate(8deg); z-index:10; opacity:0; }
+    /* Floating badge — sits on hero-right, above the masked book-scene */
+    .floating-badge { position:absolute; top:2rem; right:0; background:var(--orange); padding:0.7rem 0.9rem; clip-path:polygon(0 0,100% 0,100% 80%,50% 100%,0 80%); text-align:center; transform:rotate(8deg); z-index:20; opacity:0; }
     .badge-line1 { font-size:0.58rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:white; }
     .badge-line2 { font-size:0.52rem; font-weight:500; color:rgba(255,255,255,0.85); }
 
@@ -397,14 +392,15 @@
       </div>
     </div>
 
-    <div class="hero-right">
+    <div class="hero-right" style="position:relative;">
+      <!-- Badge sits OUTSIDE the masked book-scene so the mask doesn't clip it -->
+      <div class="floating-badge" id="badge">
+        <div class="badge-line1">Shingo</div>
+        <div class="badge-line2">Endorsed</div>
+      </div>
+
       <div class="book-scene" id="book-scene">
         <div class="book-glow"></div>
-
-        <div class="floating-badge" id="badge">
-          <div class="badge-line1">Shingo</div>
-          <div class="badge-line2">Endorsed</div>
-        </div>
 
         <div class="book-float" id="book-3d">
           <img
@@ -724,34 +720,43 @@
       .from('#book-3d',     { opacity:0, y:50, duration:1.0, ease:'power3.out' }, '-=0.7')
       .to('#badge',         { opacity:1, duration:0.5, ease:'back.out(2)' }, '-=0.3');
 
+    // Float loop — runs independently of the entrance timeline, uses `y` and `rotation`
+    // (the tilt uses rotationX/rotationY so they don't conflict)
+    gsap.to('#book-3d', {
+      y: -22,
+      rotation: -1.5,
+      duration: 2.8,
+      ease: 'sine.inOut',
+      yoyo: true,
+      repeat: -1,
+      delay: 2.2,  // wait for entrance to finish
+    });
+
     // Counters
     document.querySelectorAll('[data-count]').forEach(el => {
       const target = +el.dataset.count;
       gsap.fromTo(el, { textContent:'0' }, { textContent:target, duration:1.5, delay:1.2, ease:'power2.out', snap:{ textContent:1 }, onUpdate() { el.textContent = Math.round(+el.textContent); } });
     });
 
-    // Book mouse-tracking tilt
+    // Book mouse-tracking tilt — uses 3D rotation props that don't conflict with float (y, rotate)
+    // No `overwrite` so the float tween stays alive underneath.
     const bookScene = document.getElementById('book-scene');
     const book3d    = document.getElementById('book-3d');
+    gsap.set(book3d, { transformPerspective: 1200, transformOrigin: 'center center' });
+
+    const tiltY = gsap.quickTo(book3d, 'rotationY', { duration: 0.5, ease: 'power2.out' });
+    const tiltX = gsap.quickTo(book3d, 'rotationX', { duration: 0.5, ease: 'power2.out' });
+
     bookScene.addEventListener('mousemove', e => {
       const r  = bookScene.getBoundingClientRect();
       const nx = (e.clientX - r.left) / r.width  - 0.5;
       const ny = (e.clientY - r.top)  / r.height - 0.5;
-      gsap.to(book3d, {
-        rotateY: nx * 18, rotateX: -ny * 10,
-        duration: 0.5, ease: 'power2.out',
-        transformPerspective: 1200,
-        // pause the float animation while hovering
-        animationPlayState: 'paused',
-        overwrite: 'auto',
-      });
+      tiltY(nx * 18);
+      tiltX(-ny * 10);
     });
     bookScene.addEventListener('mouseleave', () => {
-      gsap.to(book3d, {
-        rotateY: 0, rotateX: 0,
-        duration: 0.9, ease: 'elastic.out(1, 0.5)',
-        overwrite: 'auto',
-      });
+      tiltY(0);
+      tiltX(0);
     });
 
     // Hero parallax
