@@ -484,13 +484,14 @@
       <img class="video-poster" src="video-poster.jpg" alt="The Excellence Blueprint — author intro"/>
       <video
         id="author-video"
-        src="author-intro.mp4"
         poster="video-poster.jpg"
         preload="metadata"
         playsinline
         controls
-        type="video/mp4"
-      ></video>
+      >
+        <source src="author-intro.webm" type="video/webm">
+        <source src="author-intro.mp4" type="video/mp4">
+      </video>
       <div class="video-play" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       </div>
