@@ -74,7 +74,7 @@
     .hero-kicker { display:flex; align-items:center; gap:0.75rem; font-size:0.7rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--orange); }
     .hero-kicker::before { content:''; display:inline-block; width:28px; height:1px; background:var(--orange); }
 
-    .hero-title { font-family:'Lora',serif; font-size:clamp(2.6rem,4.8vw,5rem); font-weight:600; line-height:1.08; letter-spacing:-0.02em; color:var(--cream); }
+    .hero-title { font-family:'Lora',serif; font-size:clamp(2.6rem,4.8vw,5rem); font-weight:600; line-height:1.18; letter-spacing:-0.02em; color:var(--cream); padding-bottom:0.15em; }
     .hero-title .gold { color:var(--gold); font-style:italic; }
 
     .hero-problem { font-size:0.9rem; line-height:1.65; color:var(--muted); max-width:50ch; padding-left:1rem; border-left:2px solid rgba(200,90,58,0.4); opacity:0; }
@@ -147,7 +147,7 @@
 
     /* ── MARQUEE ── */
     .marquee-band { border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; padding:0.85rem 0; white-space:nowrap; background:rgba(255,255,255,0.02); }
-    .marquee-track { display:inline-flex; gap:4rem; animation:marquee-scroll 30s linear infinite; }
+    .marquee-track { display:inline-flex; gap:4rem; animation:marquee-scroll 60s linear infinite; }
     .marquee-item { font-size:0.7rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:1rem; }
     .marquee-item::after { content:'✦'; color:var(--orange); font-size:0.6rem; }
     @keyframes marquee-scroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
@@ -411,8 +411,8 @@
       <div class="hero-kicker" id="hero-kicker">Manufacturing Excellence · Publishing 2026</div>
 
       <h1 class="hero-title" id="hero-title">
-        Your Dashboard<br>Shows Green.<br>
-        Your Floor Is <span class="gold">On Fire.</span>
+        Your Dashboard Shows All Green.<br>
+        While, Your Shop Floor Is <span class="gold">On Fire.</span>
       </h1>
 
       <p class="hero-problem" id="hero-sub">
