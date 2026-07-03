@@ -321,6 +321,8 @@
 
     /* ── BIG QUOTE ── */
     #quote-section { padding:4rem 3rem; position:relative; text-align:center; overflow:hidden; }
+    #opening-quote { padding:4.5rem 3rem 3.5rem; position:relative; text-align:center; overflow:hidden; }
+    #opening-quote::before { content:''; position:absolute; inset:0; background:linear-gradient(180deg,var(--ink) 0%,var(--surface) 60%,var(--ink) 100%); z-index:0; }
     #quote-section::before { content:''; position:absolute; inset:0; background:linear-gradient(180deg,var(--ink) 0%,var(--surface) 50%,var(--ink) 100%); z-index:0; }
     .big-quote { position:relative; z-index:1; max-width:800px; margin:0 auto; }
     .quote-mark { font-size:4.5rem; line-height:0.6; font-family:'Lora',serif; color:rgba(200,90,58,0.15); display:block; margin-bottom:0.5rem; }
@@ -371,7 +373,7 @@
       .testi-grid { grid-template-columns:1fr; }
       nav { padding:1rem 1.5rem; }
       .nav-links .nav-link { display:none; }
-      #case-studies,#rules,#why-different,#testimonials,#quote-section,#cta { padding-left:1.5rem; padding-right:1.5rem; }
+      #case-studies,#rules,#why-different,#testimonials,#quote-section,#opening-quote,#cta { padding-left:1.5rem; padding-right:1.5rem; }
       .rules-header,.rules-scroll-container { padding-left:1.5rem; padding-right:1.5rem; }
       footer { flex-direction:column; align-items:flex-start; gap:1rem; padding:2rem 1.5rem; }
     }
@@ -479,6 +481,15 @@
       <span class="marquee-item">Business Narrative</span>
     </div>
   </div>
+
+  <!-- ── OPENING QUOTE ── -->
+  <section id="opening-quote">
+    <div class="big-quote">
+      <span class="quote-mark reveal">"</span>
+      <p class="big-quote-text reveal" style="font-size:clamp(1.25rem,2.2vw,1.9rem);">Manufacturing excellence does not fail because people lack intelligence. It fails because organizations unknowingly shape behaviors that make good intentions unsustainable.</p>
+      <div class="big-quote-attr reveal">The Excellence Blueprint</div>
+    </div>
+  </section>
 
   <!-- ── AUTHOR VIDEO ── -->
   <section id="author-video-section">
@@ -690,6 +701,60 @@
         <div class="testi-name">Shyam Bang</div>
         <div class="testi-role">Chairman</div>
         <div class="testi-org">FICCI Committee for Manufacturing Excellence</div>
+      </div>
+
+      <div class="testi-card reveal">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">A captivating and flowing text where I could relate to almost every scenario discussed. I would make The Excellence Blueprint a training manual for all engineers and managers. It is a must-read that brings shop-floor reality to life.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-name">J. S. Gujral</div>
+        <div class="testi-role">Managing Director</div>
+        <div class="testi-org">SyrmaSGS Technology Ltd.</div>
+      </div>
+
+      <div class="testi-card reveal">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">Rajinder Singh coaches excellence with a laser focus on sustainable outcomes. As I read the 26 chapters of The Excellence Blueprint, my own four decades of learning unfolded, and I found myself wondering if I could start my next innings again from the Gemba. This is a compelling read that will inspire young engineers to build a truly strong foundation.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-name">Rajiv Vermani</div>
+        <div class="testi-role">Director &amp; CEO, Hardcastle Petrofer</div>
+        <div class="testi-org">Former Plant Head, Hero MotoCorp</div>
+      </div>
+
+      <div class="testi-card reveal">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">The most powerful lesson I learned from Rajinder Ji is that the place of work is a temple, deserving the same respect as a place of worship. The Excellence Blueprint captures this philosophy perfectly. Having seen these principles transform my own factory over the last 14 years, I can attest that this book is not just a guide — it is a lived journey of humility and mastery.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-name">Jayesh R. Tekchandaney</div>
+        <div class="testi-role">Director – Technical &amp; Sales</div>
+        <div class="testi-org">Unique Mixers &amp; Furnaces Pvt. Ltd.</div>
+      </div>
+
+      <div class="testi-card reveal">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">A gripping story that captures the raw tension of understanding the real world. The Excellence Blueprint is a vital lesson for young graduates who think making pretty slides is the shorter path to the top. I was moved by the authenticity of the journey; it is a must-read for anyone who wants to understand how things are truly manufactured.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-name">Carlo Baroncelli</div>
+        <div class="testi-role">Senior Vice President</div>
+        <div class="testi-org">EFESO Consulting · Italy</div>
+      </div>
+
+      <div class="testi-card reveal">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">A powerful reminder that while technology transforms industries, it is human wisdom that truly builds them. Rajinder Singh beautifully bridges experience and innovation, showing that leadership is not coded in algorithms but shaped through courage, character, and clarity. A deeply relevant read for every leader navigating the digital age.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-name">Author Sherry</div>
+        <div class="testi-role">13-time International TEDx Speaker</div>
+        <div class="testi-org">Public Speaking Coach</div>
+      </div>
+
+      <div class="testi-card reveal">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">A wonderful mix of characters — engineers, technicians, and managers — offering a 360-degree view of the complex life of a manufacturing leader. The 25 rules provide amazing insights and lessons; follow them and enjoy your leadership journey. A reading experience that beautifully combines nostalgia with professional pride.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-name">Dr. Hesham O. Dinana</div>
+        <div class="testi-role">Senior Partner</div>
+        <div class="testi-org">EFESO · Egypt and Middle East</div>
       </div>
     </div>
   </section>
