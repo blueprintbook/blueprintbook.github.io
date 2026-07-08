@@ -44,6 +44,35 @@
     /* ── SCROLL BAR ── */
     #scroll-bar { position:fixed; top:0; left:0; z-index:200; height:2px; background:linear-gradient(to right,var(--orange),var(--gold)); transform-origin:left center; transform:scaleX(0); }
 
+    /* ── TALK TO ADI FLOATING BUTTON ── */
+    #talk-adi-fab {
+      position:fixed; right:1.75rem; bottom:1.75rem; z-index:150;
+      display:flex; align-items:center; gap:0.65rem;
+      background:linear-gradient(135deg,var(--orange),var(--gold));
+      color:var(--ink); text-decoration:none; cursor:none;
+      padding:0.7rem 1.15rem 0.7rem 0.7rem; border-radius:100px;
+      box-shadow:0 8px 28px rgba(200,90,58,0.4), 0 2px 8px rgba(0,0,0,0.3);
+      opacity:0; transform:translateY(16px) scale(0.94); pointer-events:none;
+      transition:opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out), box-shadow 0.2s;
+    }
+    #talk-adi-fab.visible { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+    #talk-adi-fab:hover { box-shadow:0 10px 34px rgba(200,90,58,0.55), 0 2px 8px rgba(0,0,0,0.35); transform:translateY(-2px) scale(1.02); }
+    #talk-adi-fab:active { transform:scale(0.97); }
+    #talk-adi-fab .fab-avatar {
+      width:34px; height:34px; border-radius:50%; background:var(--ink); color:var(--gold2);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Lora',serif; font-weight:700; font-size:0.95rem; flex-shrink:0;
+    }
+    #talk-adi-fab .fab-label { font-family:'Geist',sans-serif; font-weight:700; font-size:0.82rem; letter-spacing:0.01em; white-space:nowrap; }
+    #talk-adi-fab .fab-sub { display:block; font-weight:500; font-size:0.66rem; opacity:0.75; letter-spacing:0.02em; }
+    @media (max-width:640px) {
+      #talk-adi-fab { right:1rem; bottom:1rem; padding:0.6rem 1rem 0.6rem 0.6rem; }
+      #talk-adi-fab .fab-avatar { width:30px; height:30px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #talk-adi-fab { transition:opacity 0.01ms; }
+    }
+
     /* ── NAV ── */
     nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.1rem 3rem; display:flex; align-items:center; justify-content:space-between; transition:background 0.4s,backdrop-filter 0.4s; }
     nav.scrolled { background:rgba(10,13,18,0.88); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
@@ -59,7 +88,7 @@
     .nav-links { display:flex; align-items:center; gap:2rem; }
     .nav-link { font-size:0.78rem; font-weight:500; color:var(--muted); text-decoration:none; transition:color 0.2s; }
     .nav-link:hover { color:var(--cream); }
-    .nav-cta { padding:0.55rem 1.4rem; border:1px solid var(--orange); color:var(--orange); font-size:0.78rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; cursor:none; background:transparent; transition:background 0.2s,color 0.2s,transform 0.16s var(--ease-out); }
+    .nav-cta { padding:0.55rem 1.4rem; border:1px solid var(--orange); color:var(--orange); font-size:0.78rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; cursor:none; background:transparent; text-decoration:none; display:inline-block; transition:background 0.2s,color 0.2s,transform 0.16s var(--ease-out); }
     .nav-cta:hover { background:var(--orange); color:white; }
     .nav-cta:active { transform:scale(0.97); }
 
@@ -385,6 +414,11 @@
   <div id="cursor-ring"></div>
   <div id="scroll-bar"></div>
 
+  <a href="talk-to-adi.html" id="talk-adi-fab" aria-label="Talk to Adi">
+    <span class="fab-avatar">A</span>
+    <span class="fab-label">Talk to Adi<span class="fab-sub">Ask about a Rule →</span></span>
+  </a>
+
   <!-- ── NAV ── -->
   <nav id="nav">
     <a href="#" class="nav-brand">
@@ -401,7 +435,7 @@
       <a href="#testimonials" class="nav-link">Praise</a>
       <a href="talk-to-adi.html" class="nav-link">Talk to Adi</a>
       <a href="#cta" class="nav-link">Get the Book</a>
-      <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Pre-Order</button>
+      <a href="https://amzn.in/d/0f6ZrYsS" target="_blank" rel="noopener" class="nav-cta">Buy Now</a>
     </div>
   </nav>
 
@@ -411,7 +445,7 @@
     <div class="orb orb-2"></div>
 
     <div class="hero-left">
-      <div class="hero-kicker" id="hero-kicker">Manufacturing Excellence · Publishing 2026</div>
+      <div class="hero-kicker" id="hero-kicker">Manufacturing Excellence · Available Now</div>
 
       <h1 class="hero-title" id="hero-title">
         Your Dashboard Shows All Green.<br>
@@ -438,7 +472,7 @@
       </div>
 
       <div class="hero-actions" id="hero-actions">
-        <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Get Notified at Launch</button>
+        <a href="https://amzn.in/d/0f6ZrYsS" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">Buy Now on Amazon</a>
         <button class="btn-ghost" onclick="document.getElementById('rules').scrollIntoView({behavior:'smooth'})">
           Explore the 25 Rules
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -773,22 +807,31 @@
   <section id="cta">
     <div class="cta-inner">
       <div class="section-overline n06 reveal" style="justify-content:center;">Get the Book</div>
-      <h2 class="cta-title reveal">Join the Executive<br>Blueprint Circle</h2>
-      <p class="cta-sub reveal">Get exclusive pre-launch chapters and be first in line when the print edition drops on Amazon, Flipkart, and Notion Press.</p>
+      <h2 class="cta-title reveal">The Book Is<br>Available Now</h2>
+      <p class="cta-sub reveal">Get your copy of The Excellence Blueprint on Amazon India or read it directly on Notion Press.</p>
 
+      <div class="hero-actions reveal" style="justify-content:center;margin-bottom:2.5rem;">
+        <a href="https://amzn.in/d/0f6ZrYsS" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">Buy on Amazon</a>
+        <a href="https://notionpress.com/in/read/the-excellence-blueprint?utm_source=share_publish_email&utm_medium=whatsapp" target="_blank" rel="noopener" class="btn-ghost" style="text-decoration:none;">
+          Read on Notion Press
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <p class="purchase-label reveal">Get updates from Rajinder</p>
       <form class="email-form reveal" id="email-form" onsubmit="handleSubmit(event)">
         <input type="email" class="email-input" placeholder="your@email.com" required id="email-input"/>
-        <button type="submit" class="email-submit" id="submit-btn">Join Now</button>
+        <button type="submit" class="email-submit" id="submit-btn">Subscribe</button>
       </form>
 
-      <p class="purchase-label reveal">Available at launch on</p>
+      <p class="purchase-label reveal" style="margin-top:2.5rem;">Available on</p>
       <div class="purchase-channels reveal">
-        <span class="purchase-chip"><span class="chip-dot"></span>Notion Press</span>
-        <span class="purchase-chip"><span class="chip-dot"></span>Amazon India</span>
-        <span class="purchase-chip"><span class="chip-dot"></span>Amazon US / UK</span>
-        <span class="purchase-chip"><span class="chip-dot"></span>Flipkart</span>
+        <a href="https://notionpress.com/in/read/the-excellence-blueprint?utm_source=share_publish_email&utm_medium=whatsapp" target="_blank" rel="noopener" class="purchase-chip" style="text-decoration:none;cursor:pointer;"><span class="chip-dot"></span>Notion Press</a>
+        <a href="https://amzn.in/d/0f6ZrYsS" target="_blank" rel="noopener" class="purchase-chip" style="text-decoration:none;cursor:pointer;"><span class="chip-dot"></span>Amazon India</a>
+        <span class="purchase-chip" style="opacity:0.5;"><span class="chip-dot"></span>Amazon US / UK</span>
+        <span class="purchase-chip" style="opacity:0.5;"><span class="chip-dot"></span>Flipkart</span>
       </div>
-      <p class="launch-note reveal">Publishing 2026 · Notion Press</p>
+      <p class="launch-note reveal">Available Now · Notion Press &amp; Amazon India</p>
     </div>
   </section>
 
@@ -831,6 +874,9 @@
     // Scroll bar
     const scrollBar = document.getElementById('scroll-bar');
     lenis.on('scroll', ({ progress }) => { scrollBar.style.transform = `scaleX(${progress})`; });
+
+    // Talk to Adi floating button — reveal after hero
+    ScrollTrigger.create({ start:'top -400', onEnter:() => document.getElementById('talk-adi-fab').classList.add('visible'), onLeaveBack:() => document.getElementById('talk-adi-fab').classList.remove('visible') });
 
     // Nav scroll state
     ScrollTrigger.create({ start:'top -80', onEnter:() => document.getElementById('nav').classList.add('scrolled'), onLeaveBack:() => document.getElementById('nav').classList.remove('scrolled') });
