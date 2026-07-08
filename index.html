@@ -378,13 +378,6 @@
     .cta-inner { max-width:660px; margin:0 auto; text-align:center; position:relative; z-index:1; }
     .cta-title { font-family:'Lora',serif; font-size:clamp(2rem,3.8vw,3.2rem); font-weight:600; line-height:1.2; color:var(--cream); margin-bottom:1rem; }
     .cta-sub { font-size:0.95rem; line-height:1.65; color:var(--muted); margin-bottom:2.5rem; max-width:50ch; margin-left:auto; margin-right:auto; }
-    .email-form { display:flex; gap:0; border:1px solid var(--border); background:rgba(255,255,255,0.03); transition:border-color 0.3s; max-width:460px; margin:0 auto 2.5rem; }
-    .email-form:focus-within { border-color:rgba(200,90,58,0.5); }
-    .email-input { flex:1; padding:1rem 1.25rem; background:transparent; border:none; font-family:'Geist',sans-serif; font-size:0.88rem; color:var(--cream); outline:none; }
-    .email-input::placeholder { color:var(--muted); }
-    .email-submit { padding:1rem 1.75rem; background:var(--orange); border:none; color:white; font-family:'Geist',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:none; transition:background 0.2s,transform 0.16s var(--ease-out); flex-shrink:0; }
-    .email-submit:hover { background:var(--orange2); }
-    .email-submit:active { transform:scale(0.97); }
 
     .purchase-label { font-size:0.68rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
     .purchase-channels { display:flex; align-items:center; justify-content:center; gap:1rem; flex-wrap:wrap; }
@@ -860,13 +853,7 @@
         </a>
       </div>
 
-      <p class="purchase-label reveal">Get updates from Rajinder</p>
-      <form class="email-form reveal" id="email-form" onsubmit="handleSubmit(event)">
-        <input type="email" class="email-input" placeholder="your@email.com" required id="email-input"/>
-        <button type="submit" class="email-submit" id="submit-btn">Subscribe</button>
-      </form>
-
-      <p class="purchase-label reveal" style="margin-top:2.5rem;">Available on</p>
+      <p class="purchase-label reveal">Available on</p>
       <div class="purchase-channels reveal">
         <a href="https://notionpress.com/in/read/the-excellence-blueprint?utm_source=share_publish_email&utm_medium=whatsapp" target="_blank" rel="noopener" class="purchase-chip" style="text-decoration:none;cursor:pointer;"><span class="chip-dot"></span>Notion Press</a>
         <a href="https://amzn.in/d/0f6ZrYsS" target="_blank" rel="noopener" class="purchase-chip" style="text-decoration:none;cursor:pointer;"><span class="chip-dot"></span>Amazon India</a>
@@ -975,7 +962,7 @@
     gsap.from('#quote-section .big-quote-text', { clipPath:'inset(0 100% 0 0)', duration:1.4, ease:'power4.inOut', scrollTrigger:{ trigger:'#quote-section', start:'top 70%', once:true } });
 
     // Magnetic buttons
-    document.querySelectorAll('.btn-primary,.btn-ghost,.email-submit').forEach(btn => {
+    document.querySelectorAll('.btn-primary,.btn-ghost').forEach(btn => {
       btn.addEventListener('mousemove', e => {
         const r = btn.getBoundingClientRect();
         gsap.to(btn, { x:(e.clientX-r.left-r.width/2)*0.28, y:(e.clientY-r.top-r.height/2)*0.28, duration:0.35, ease:'power2.out' });
@@ -984,18 +971,6 @@
     });
 
   }); // end DOMContentLoaded
-
-  // Form submission — must be global because of inline onsubmit handler
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    gsap.to(btn, { scale:0.95, duration:0.1, onComplete:() => {
-      gsap.to(btn, { scale:1, duration:0.4, ease:'elastic.out(1,0.5)' });
-      btn.textContent = '✓ You\'re in';
-      btn.style.background = '#2a6a3a';
-      setTimeout(() => { btn.textContent='Join Now'; btn.style.background=''; document.getElementById('email-input').value=''; }, 2500);
-    }});
-  }
 
   // Video player — click-to-play (no autoplay, no preload)
   function playAuthorVideo() {
