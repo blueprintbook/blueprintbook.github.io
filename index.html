@@ -44,9 +44,9 @@
     /* ── SCROLL BAR ── */
     #scroll-bar { position:fixed; top:0; left:0; z-index:200; height:2px; background:linear-gradient(to right,var(--orange),var(--gold)); transform-origin:left center; transform:scaleX(0); }
 
-    /* ── TALK TO ADI FLOATING BUTTON ── */
-    #talk-adi-fab {
-      position:fixed; right:1.75rem; bottom:1.75rem; z-index:150;
+    /* ── FLOATING BUTTONS (Talk to Adi / Buy Now) ── */
+    .site-fab {
+      position:fixed; bottom:1.75rem; z-index:150;
       display:flex; align-items:center; gap:0.65rem;
       background:linear-gradient(135deg,var(--orange),var(--gold));
       color:var(--ink); text-decoration:none; cursor:none;
@@ -55,22 +55,26 @@
       opacity:0; transform:translateY(16px) scale(0.94); pointer-events:none;
       transition:opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out), box-shadow 0.2s;
     }
-    #talk-adi-fab.visible { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
-    #talk-adi-fab:hover { box-shadow:0 10px 34px rgba(200,90,58,0.55), 0 2px 8px rgba(0,0,0,0.35); transform:translateY(-2px) scale(1.02); }
-    #talk-adi-fab:active { transform:scale(0.97); }
-    #talk-adi-fab .fab-avatar {
+    .site-fab.visible { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+    .site-fab:hover { box-shadow:0 10px 34px rgba(200,90,58,0.55), 0 2px 8px rgba(0,0,0,0.35); transform:translateY(-2px) scale(1.02); }
+    .site-fab:active { transform:scale(0.97); }
+    .site-fab .fab-avatar {
       width:34px; height:34px; border-radius:50%; background:var(--ink); color:var(--gold2);
       display:flex; align-items:center; justify-content:center;
       font-family:'Lora',serif; font-weight:700; font-size:0.95rem; flex-shrink:0;
     }
-    #talk-adi-fab .fab-label { font-family:'Geist',sans-serif; font-weight:700; font-size:0.82rem; letter-spacing:0.01em; white-space:nowrap; }
-    #talk-adi-fab .fab-sub { display:block; font-weight:500; font-size:0.66rem; opacity:0.75; letter-spacing:0.02em; }
+    .site-fab .fab-label { font-family:'Geist',sans-serif; font-weight:700; font-size:0.82rem; letter-spacing:0.01em; white-space:nowrap; }
+    .site-fab .fab-sub { display:block; font-weight:500; font-size:0.66rem; opacity:0.75; letter-spacing:0.02em; }
+    #talk-adi-fab { right:1.75rem; }
+    #buy-now-fab { left:1.75rem; }
     @media (max-width:640px) {
-      #talk-adi-fab { right:1rem; bottom:1rem; padding:0.6rem 1rem 0.6rem 0.6rem; }
-      #talk-adi-fab .fab-avatar { width:30px; height:30px; }
+      .site-fab { bottom:1rem; padding:0.6rem 1rem 0.6rem 0.6rem; }
+      .site-fab .fab-avatar { width:30px; height:30px; }
+      #talk-adi-fab { right:1rem; }
+      #buy-now-fab { left:1rem; }
     }
     @media (prefers-reduced-motion: reduce) {
-      #talk-adi-fab { transition:opacity 0.01ms; }
+      .site-fab { transition:opacity 0.01ms; }
     }
 
     /* ── NAV ── */
@@ -100,9 +104,6 @@
 
     #mobile-menu { display:none; }
     .nav-link:hover { color:var(--cream); }
-    .nav-cta { padding:0.55rem 1.4rem; border:1px solid var(--orange); color:var(--orange); font-size:0.78rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; cursor:none; background:transparent; text-decoration:none; display:inline-block; transition:background 0.2s,color 0.2s,transform 0.16s var(--ease-out); }
-    .nav-cta:hover { background:var(--orange); color:white; }
-    .nav-cta:active { transform:scale(0.97); }
 
     /* ── HERO ── */
     #hero { min-height:100dvh; display:grid; grid-template-columns:1fr 1.15fr; padding:0 3rem; padding-top:5.5rem; padding-bottom:3rem; gap:2rem; align-items:center; position:relative; overflow:hidden; }
@@ -439,7 +440,14 @@
   <div id="cursor-ring"></div>
   <div id="scroll-bar"></div>
 
-  <a href="talk-to-adi.html" id="talk-adi-fab" aria-label="I am Adi, let's chat">
+  <a href="https://amzn.in/d/0f6ZrYsS" target="_blank" rel="noopener" id="buy-now-fab" class="site-fab" aria-label="Buy Now on Amazon">
+    <span class="fab-avatar">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h1.5l1 8.5A1.5 1.5 0 0 0 6 14h6a1.5 1.5 0 0 0 1.48-1.24L14.5 6H4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="14.5" r="1" fill="currentColor"/><circle cx="12" cy="14.5" r="1" fill="currentColor"/></svg>
+    </span>
+    <span class="fab-label">Buy Now<span class="fab-sub">On Amazon →</span></span>
+  </a>
+
+  <a href="talk-to-adi.html" id="talk-adi-fab" class="site-fab" aria-label="I am Adi, let's chat">
     <span class="fab-avatar">A</span>
     <span class="fab-label">I am Adi<span class="fab-sub">Let's chat →</span></span>
   </a>
@@ -460,7 +468,6 @@
       <a href="#testimonials" class="nav-link">Praise</a>
       <a href="talk-to-adi.html" class="nav-link">I am Adi, let's chat</a>
       <a href="#cta" class="nav-link">Get the Book</a>
-      <a href="https://amzn.in/d/0f6ZrYsS" target="_blank" rel="noopener" class="nav-cta">Buy Now</a>
     </div>
     <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
   </nav>
@@ -911,7 +918,7 @@
     lenis.on('scroll', ({ progress }) => { scrollBar.style.transform = `scaleX(${progress})`; });
 
     // Talk to Adi floating button — reveal after hero
-    ScrollTrigger.create({ start:'top -400', onEnter:() => document.getElementById('talk-adi-fab').classList.add('visible'), onLeaveBack:() => document.getElementById('talk-adi-fab').classList.remove('visible') });
+    ScrollTrigger.create({ start:'top -400', onEnter:() => document.querySelectorAll('.site-fab').forEach(f => f.classList.add('visible')), onLeaveBack:() => document.querySelectorAll('.site-fab').forEach(f => f.classList.remove('visible')) });
 
     // Nav scroll state
     ScrollTrigger.create({ start:'top -80', onEnter:() => document.getElementById('nav').classList.add('scrolled'), onLeaveBack:() => document.getElementById('nav').classList.remove('scrolled') });
@@ -968,7 +975,7 @@
     gsap.from('#quote-section .big-quote-text', { clipPath:'inset(0 100% 0 0)', duration:1.4, ease:'power4.inOut', scrollTrigger:{ trigger:'#quote-section', start:'top 70%', once:true } });
 
     // Magnetic buttons
-    document.querySelectorAll('.btn-primary,.btn-ghost,.nav-cta,.email-submit').forEach(btn => {
+    document.querySelectorAll('.btn-primary,.btn-ghost,.email-submit').forEach(btn => {
       btn.addEventListener('mousemove', e => {
         const r = btn.getBoundingClientRect();
         gsap.to(btn, { x:(e.clientX-r.left-r.width/2)*0.28, y:(e.clientY-r.top-r.height/2)*0.28, duration:0.35, ease:'power2.out' });
