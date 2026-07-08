@@ -87,6 +87,18 @@
     .nav-logo-sub { font-size:0.56rem; font-weight:400; letter-spacing:0.06em; color:var(--muted); display:block; }
     .nav-links { display:flex; align-items:center; gap:2rem; }
     .nav-link { font-size:0.78rem; font-weight:500; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+
+    /* ── MOBILE MENU TOGGLE ── */
+    .nav-burger { display:none; width:38px; height:38px; border:1px solid var(--border); background:transparent; cursor:pointer; align-items:center; justify-content:center; flex-shrink:0; }
+    .nav-burger span { position:relative; width:16px; height:1px; background:var(--cream); display:block; transition:background 0.2s; }
+    .nav-burger span::before, .nav-burger span::after { content:''; position:absolute; left:0; width:16px; height:1px; background:var(--cream); transition:transform 0.25s var(--ease-out), top 0.25s var(--ease-out); }
+    .nav-burger span::before { top:-5px; }
+    .nav-burger span::after { top:5px; }
+    .nav-burger.open span { background:transparent; }
+    .nav-burger.open span::before { top:0; transform:rotate(45deg); }
+    .nav-burger.open span::after { top:0; transform:rotate(-45deg); }
+
+    #mobile-menu { display:none; }
     .nav-link:hover { color:var(--cream); }
     .nav-cta { padding:0.55rem 1.4rem; border:1px solid var(--orange); color:var(--orange); font-size:0.78rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; cursor:none; background:transparent; text-decoration:none; display:inline-block; transition:background 0.2s,color 0.2s,transform 0.16s var(--ease-out); }
     .nav-cta:hover { background:var(--orange); color:white; }
@@ -402,6 +414,19 @@
       .testi-grid { grid-template-columns:1fr; }
       nav { padding:1rem 1.5rem; }
       .nav-links .nav-link { display:none; }
+      .nav-burger { display:flex; }
+      #mobile-menu {
+        display:block; position:fixed; top:0; left:0; right:0; z-index:99;
+        background:rgba(10,13,18,0.98); backdrop-filter:blur(14px);
+        border-bottom:1px solid var(--border);
+        padding:5.2rem 1.5rem 1.5rem;
+        transform:translateY(-100%); opacity:0; pointer-events:none;
+        transition:transform 0.35s var(--ease-out), opacity 0.3s;
+      }
+      #mobile-menu.open { transform:translateY(0); opacity:1; pointer-events:auto; }
+      #mobile-menu .mm-link { display:block; font-family:'Geist',sans-serif; font-size:1.05rem; font-weight:600; color:var(--cream); text-decoration:none; padding:0.9rem 0; border-bottom:1px solid var(--border); }
+      #mobile-menu .mm-link:last-of-type { border-bottom:none; }
+      #mobile-menu .mm-buy { display:block; text-align:center; margin-top:1.5rem; background:var(--orange); color:white; font-weight:700; font-size:0.85rem; letter-spacing:0.06em; text-transform:uppercase; padding:0.9rem; text-decoration:none; }
       #case-studies,#rules,#why-different,#testimonials,#quote-section,#opening-quote,#cta { padding-left:1.5rem; padding-right:1.5rem; }
       .rules-header,.rules-scroll-container { padding-left:1.5rem; padding-right:1.5rem; }
       footer { flex-direction:column; align-items:flex-start; gap:1rem; padding:2rem 1.5rem; }
@@ -437,7 +462,17 @@
       <a href="#cta" class="nav-link">Get the Book</a>
       <a href="https://amzn.in/d/0f6ZrYsS" target="_blank" rel="noopener" class="nav-cta">Buy Now</a>
     </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
   </nav>
+
+  <div id="mobile-menu">
+    <a href="#about" class="mm-link">The Author</a>
+    <a href="#rules" class="mm-link">25 Rules</a>
+    <a href="#testimonials" class="mm-link">Praise</a>
+    <a href="talk-to-adi.html" class="mm-link">Talk to Adi</a>
+    <a href="#cta" class="mm-link">Get the Book</a>
+    <a href="https://amzn.in/d/0f6ZrYsS" target="_blank" rel="noopener" class="mm-buy">Buy Now</a>
+  </div>
 
   <!-- ── HERO ── -->
   <section id="hero">
@@ -880,6 +915,21 @@
 
     // Nav scroll state
     ScrollTrigger.create({ start:'top -80', onEnter:() => document.getElementById('nav').classList.add('scrolled'), onLeaveBack:() => document.getElementById('nav').classList.remove('scrolled') });
+
+    // Mobile menu toggle
+    const navBurger = document.getElementById('nav-burger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function closeMobileMenu() {
+      navBurger.classList.remove('open');
+      navBurger.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('open');
+    }
+    navBurger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      navBurger.classList.toggle('open', isOpen);
+      navBurger.setAttribute('aria-expanded', String(isOpen));
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
 
     // Hero entrance
     const tl = gsap.timeline({ defaults:{ ease:'power4.out' } });
